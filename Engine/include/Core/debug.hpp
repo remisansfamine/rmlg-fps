@@ -1,0 +1,91 @@
+#pragma once
+
+#include "singleton.hpp"
+
+#include <chrono>
+#include <ctime>
+
+#include <iostream>
+
+namespace Core
+{
+	namespace Debug
+	{
+		enum class LogType
+		{
+			ERROR,
+			ASSERTION,
+			WARNING,
+			INFO,
+			EXCEPTION
+		};
+
+		class Log final : public Singleton<Log>
+		{
+			friend class Singleton<Log>;
+
+		private:
+			std::string logs;
+
+			~Log();
+
+			static void saveToFile();
+
+			// Output the casted log
+			static void out(const std::string& log, LogType logType);
+
+		public:
+			template <typename T>
+			static void logException(const T& log)
+			{
+				out(std::string("EXCEPTION: ") + log, LogType::EXCEPTION);
+			}
+
+			template <typename T>
+			static void logWarning(const T& log)
+			{
+				out(std::string("Warning: ") + log, LogType::WARNING);
+			}
+
+			template <typename T>
+			static void logAssertion(const T& log)
+			{
+				out(std::string("ASSERTION: ") + log, LogType::ASSERTION);
+			}
+
+			template <typename T>
+			static void logError(const T& log)
+			{
+				out(std::string("ERROR: ") + log, LogType::ERROR);
+			}
+
+			template <typename T>
+			static void logInfo(const T& log)
+			{
+				out(std::string("Info: ") + log, LogType::INFO);
+			}
+		};
+
+		class Assertion final : public Singleton<Assertion>
+		{
+			friend class Singleton<Assertion>;
+
+		private:
+			Assertion();
+			~Assertion();
+
+		public:
+			// Get assertion
+			static void out(const std::exception& assertion);
+
+			// Get any supported type and check is the condition return true
+			template <typename T>
+			static void out(bool condition, const T& assertion)
+			{
+				// If the condition does not return true, return an error
+				if (!condition)
+					throw std::string(assertion);
+			}
+		};
+	};
+}

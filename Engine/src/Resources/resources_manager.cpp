@@ -6,12 +6,12 @@ namespace Resources
 {
 	ResourcesManager::ResourcesManager()
 	{
-		Core::Debug::Log::logInfo("Creating the Resources Manager");
+		Core::Debug::Log::info("Creating the Resources Manager");
 	}
 
 	ResourcesManager::~ResourcesManager()
 	{
-		Core::Debug::Log::logInfo("Destroying the Resources Manager");
+		Core::Debug::Log::info("Destroying the Resources Manager");
 	}
 
 	void ResourcesManager::init()
@@ -20,7 +20,7 @@ namespace Resources
 
 		if (RM->initialized)
 		{
-			Core::Debug::Log::logError("The Resources Manager is already initialized");
+			Core::Debug::Log::error("The Resources Manager is already initialized");
 			return;
 		}
 
@@ -28,7 +28,22 @@ namespace Resources
 
 		RM->initialized = true;
 
-		Core::Debug::Log::logInfo("Resources Manager initialized");
+		Core::Debug::Log::info("Resources Manager initialized");
+	}
+
+	std::shared_ptr<Scene> ResourcesManager::loadScene(const std::string& scenePath)
+	{
+		ResourcesManager* RM = instance();
+		
+		const auto& sceneIt = RM->scenes.find(scenePath);
+
+		if (sceneIt != RM->scenes.end())
+		{
+			return sceneIt->second;
+		}
+
+		// TODO: Add Warn load fail
+		return RM->scenes[scenePath] = std::make_shared<Scene>(Scene(scenePath));
 	}
 
 	std::shared_ptr<Shader> ResourcesManager::loadShader(const std::string& shaderPath)

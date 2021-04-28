@@ -4,11 +4,12 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
-// TODO: remove iostream inclusion
-#include <iostream>
-
 #include "resources_manager.hpp"
 #include "debug.hpp"
+
+#include "engine_master.hpp"
+
+#include "time.hpp"
 
 // glfw - Whenever the window size changed (by OS or user resize) this callback function executes
 void framebufferSizeCallback(GLFWwindow* window, int width, int height)
@@ -21,7 +22,7 @@ namespace Core
 {
 	Application::Application()
 	{
-		Core::Debug::Log::logInfo("Creating the Application");
+		Core::Debug::Log::info("Creating the Application");
 	}
 
 	Application::~Application()
@@ -30,9 +31,14 @@ namespace Core
 
 		// TODO: Kill graph/physicManager/ etc..
 
-		Core::Debug::Log::logInfo("Destroying the Application");
+		Core::Debug::Log::info("Destroying the Application");
+
+
 
 		Core::Debug::Assertion::kill();
+		Core::Engine::EngineMaster::kill();
+
+		TimeManager::kill();
 		Core::Debug::Log::kill();
 
 		// Destroy ImGui context
@@ -43,8 +49,6 @@ namespace Core
 		glfwDestroyWindow(window);
 		glfwTerminate();
 	}
-
-
 
 	GLFWwindow* Application::createWindow(unsigned int screenWidth, unsigned int screenHeight, const char* title, GLFWmonitor* monitor, GLFWwindow* share)
 	{
@@ -58,7 +62,7 @@ namespace Core
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 		// Create window
-		Core::Debug::Log::logInfo("Creating the window");
+		Core::Debug::Log::info("Creating the window");
 		GLFWwindow* newWindow = glfwCreateWindow(screenWidth, screenHeight, title, monitor, share);
 
 		// If the window could not be created, exit the program
@@ -89,17 +93,16 @@ namespace Core
 	{
 		Application* AP = instance();
 
-
 		if (AP->initialized)
 		{
-			Core::Debug::Log::logError("The Application is already initialized");
+			Core::Debug::Log::error("The Application is already initialized");
 			return;
 		}
 
 		AP->window = createWindow(screenWidth, screenHeight, title, monitor, share);
 		AP->initialized = true;
 
-		Core::Debug::Log::logInfo("Application initialized");
+		Core::Debug::Log::info("Application initialized");
 
 		// Init Resources Manager
 		Resources::ResourcesManager::init();
@@ -107,6 +110,27 @@ namespace Core
 
 	void Application::update()
 	{
+		Application* AP = instance();
+
+		while (!glfwWindowShouldClose(AP->window))
+		{
+			ImGui_ImplOpenGL3_NewFrame();
+			ImGui_ImplGlfw_NewFrame();
+			ImGui::NewFrame();
+
+			TimeManager::computeTime();
+
+			// TODO: Update Time / Inputs
+			Engine::EngineMaster::update();
+
+			ImGui::Render();
+			ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+			// glfw - Swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
+			glfwSwapBuffers(AP->window);
+			glfwPollEvents();
+		}
+
 		// TODO: remove
 		std::cout << "Bonsoir LERE" << std::endl;
 	}

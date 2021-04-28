@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -78,13 +78,13 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>$(ProjectDir)include\Physics;$(ProjectDir)include\Utils;$(ProjectDir)include\LowRenderer;$(ProjectDir)include/Core;$(ProjectDir)include\Resources;$(ProjectDir)include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\Physics;$(ProjectDir)include\Utils;$(ProjectDir)include\LowRenderer;$(ProjectDir)include/Core;$(ProjectDir)include\Resources;$(ProjectDir)include;$(ProjectDir)include\Engine;$(ProjectDir)include\Engine\Physics;$(ProjectDir)include\Engine\Render;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)src;$(SourcePath)</SourcePath>
     <LibraryPath>$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(ProjectDir)include\Physics;$(ProjectDir)include\Utils;$(ProjectDir)include\LowRenderer;$(ProjectDir)include/Core;$(ProjectDir)include\Resources;$(ProjectDir)include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\Physics;$(ProjectDir)include\Utils;$(ProjectDir)include\LowRenderer;$(ProjectDir)include/Core;$(ProjectDir)include\Resources;$(ProjectDir)include;$(ProjectDir)include\Engine;$(ProjectDir)include\Engine\Physics;$(ProjectDir)include\Engine\Render;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir)src;$(SourcePath)</SourcePath>
     <LibraryPath>$(ProjectDir)lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
@@ -152,6 +152,18 @@
   <ItemGroup>
     <ClCompile Include="src\Core\application.cpp" />
     <ClCompile Include="src\Core\debug.cpp" />
+    <ClCompile Include="src\Core\time.cpp" />
+    <ClCompile Include="src\Engine\component.cpp" />
+    <ClCompile Include="src\Engine\engine_master.cpp" />
+    <ClCompile Include="src\Engine\game_object.cpp" />
+    <ClCompile Include="src\Engine\graph.cpp" />
+    <ClCompile Include="src\Engine\object.cpp" />
+    <ClCompile Include="src\Engine\Physics\physic_manager.cpp" />
+    <ClCompile Include="src\Engine\Render\model_renderer.cpp" />
+    <ClCompile Include="src\Engine\Render\renderer.cpp" />
+    <ClCompile Include="src\Engine\Render\render_manager.cpp" />
+    <ClCompile Include="src\Engine\Render\sprite_renderer.cpp" />
+    <ClCompile Include="src\Resources\scene.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\imgui.cpp" />
     <ClCompile Include="src\imgui_demo.cpp" />
@@ -168,6 +180,18 @@
     <ClInclude Include="header\stb_image.h" />
     <ClInclude Include="include\Core\application.hpp" />
     <ClInclude Include="include\Core\debug.hpp" />
+    <ClInclude Include="include\Core\time.hpp" />
+    <ClInclude Include="include\Engine\component.hpp" />
+    <ClInclude Include="include\Engine\engine_master.hpp" />
+    <ClInclude Include="include\Engine\game_object.hpp" />
+    <ClInclude Include="include\Engine\graph.hpp" />
+    <ClInclude Include="include\Engine\model_renderer.hpp" />
+    <ClInclude Include="include\Engine\object.hpp" />
+    <ClInclude Include="include\Engine\Physics\physic_manager.hpp" />
+    <ClInclude Include="include\Engine\renderer.hpp" />
+    <ClInclude Include="include\Engine\Render\render_manager.hpp" />
+    <ClInclude Include="include\Resources\scene.hpp" />
+    <ClInclude Include="include\Engine\sprite_renderer.hpp" />
     <ClInclude Include="include\Resources\resources_manager.hpp" />
     <ClInclude Include="include\Resources\shader.hpp" />
     <ClInclude Include="include\Utils\singleton.hpp" />

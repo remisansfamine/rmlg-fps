@@ -36,31 +36,31 @@ namespace Core
 
 		public:
 			template <typename T>
-			static void logException(const T& log)
+			static void exception(const T& log)
 			{
 				out(std::string("EXCEPTION: ") + log, LogType::EXCEPTION);
 			}
 
 			template <typename T>
-			static void logWarning(const T& log)
+			static void warning(const T& log)
 			{
 				out(std::string("Warning: ") + log, LogType::WARNING);
 			}
 
 			template <typename T>
-			static void logAssertion(const T& log)
+			static void assertion(const T& log)
 			{
 				out(std::string("ASSERTION: ") + log, LogType::ASSERTION);
 			}
 
 			template <typename T>
-			static void logError(const T& log)
+			static void error(const T& log)
 			{
 				out(std::string("ERROR: ") + log, LogType::ERROR);
 			}
 
 			template <typename T>
-			static void logInfo(const T& log)
+			static void info(const T& log)
 			{
 				out(std::string("Info: ") + log, LogType::INFO);
 			}

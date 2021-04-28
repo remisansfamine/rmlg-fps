@@ -8,7 +8,7 @@ protected:
 
 	static T* currentInstance;
 
-	static T* instance()
+	[[nodiscard]] static T* instance()
 	{
 		if (!currentInstance)
 			currentInstance = new T();

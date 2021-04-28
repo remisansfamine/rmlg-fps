@@ -1,5 +1,6 @@
 #include <string>
 #include <iostream>
+#include <crtdbg.h>
 
 #include "application.hpp"
 
@@ -8,6 +9,9 @@ const unsigned int SCR_HEIGHT = 600;
 
 int main()
 {
+	// Check for leak
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
 	try
 	{
 		Core::Application::init(SCR_WIDTH, SCR_HEIGHT, "Engine");

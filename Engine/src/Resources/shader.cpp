@@ -11,7 +11,7 @@ namespace Resources
 #pragma region SHADER
 	Shader::Shader(const std::string& shaderPath)
 	{
-		Core::Debug::Log::logInfo("Loading " + shaderPath);
+		Core::Debug::Log::info("Loading " + shaderPath);
 
         std::string codeString = loadFromFile(shaderPath);
         const char* code = codeString.c_str();
@@ -21,13 +21,14 @@ namespace Resources
 
         // Check if the compilation is a success
         GLint success;
-        GLchar infoLog[GL_INFO_LOG_LENGTH];
+        const GLsizei infoSize = 256;
+        GLchar infoLog[infoSize];
         glGetShaderiv(shaderID, GL_COMPILE_STATUS, &success);
 
         if (!success)
         {
-            glGetShaderInfoLog(shaderID, GL_INFO_LOG_LENGTH, NULL, infoLog);
-            Core::Debug::Log::logError(shaderPath + " shader compilation failed" + infoLog);
+            glGetShaderInfoLog(shaderID, infoSize, NULL, infoLog);
+            Core::Debug::Log::error(shaderPath + " shader compilation failed" + infoLog);
         }
 	}
 
@@ -46,10 +47,10 @@ namespace Resources
                 shaderID = glCreateShader(GL_FRAGMENT_SHADER);
 
             else
-                Core::Debug::Log::logError("File extension is not compatible");
+                Core::Debug::Log::error("File extension is not compatible");
         }
         else
-            Core::Debug::Log::logError("Cannot open the file " + filePath);
+            Core::Debug::Log::error("Cannot open the file " + filePath);
 
         // Send the code to OpenGL as a char*
         std::string string_code;
@@ -65,9 +66,9 @@ namespace Resources
 	ShaderProgram::ShaderProgram(const std::string& programName, const std::string& vertPath, const std::string& fragPath)
         : programID(glCreateProgram())
 	{
-        Core::Debug::Log::logInfo("Loading program " + programName);
+        Core::Debug::Log::info("Loading program " + programName);
 
-        Core::Debug::Log::logInfo("Linking " + vertPath + " and " + fragPath + " to " + programName);
+        Core::Debug::Log::info("Linking " + vertPath + " and " + fragPath + " to " + programName);
 
         std::shared_ptr<Shader> vert = Resources::ResourcesManager::loadShader(vertPath);
         std::shared_ptr<Shader> frag = Resources::ResourcesManager::loadShader(fragPath);
@@ -82,17 +83,134 @@ namespace Resources
 
         // Check if there is an error
         GLint success;
-        GLchar infoLog[GL_INFO_LOG_LENGTH];
+        const GLsizei infoSize = 256;
+        GLchar infoLog[infoSize];
         glGetProgramiv(programID, GL_LINK_STATUS, &success);
         if (!success)
         {
-            glGetProgramInfoLog(programID, GL_INFO_LOG_LENGTH, NULL, infoLog);
-            Core::Debug::Log::logError(programName + " shader program linking failed" + infoLog);
+            glGetProgramInfoLog(programID, infoSize, NULL, infoLog);
+            Core::Debug::Log::error(programName + " shader program linking failed" + infoLog);
         }
         // TODO: Load locations
         // If there is no error, load the uniform locations of the program
-        //else
-        //    loadLocations();
+        else
+            loadLocations();
 	}
-#pragma endregion
+
+    void ShaderProgram::loadLocations()
+    {
+        uniforms.clear();
+
+        // Get the active uniforms count
+        GLint uniformCount;
+        glGetProgramiv(programID, GL_ACTIVE_UNIFORMS, &uniformCount);
+
+        // Loop over the active uniforms
+        for (GLint i = 0; i < uniformCount; i++)
+        {
+            GLsizei nameLength;
+            GLint size;             // Size of the variable
+            GLenum type;            // Type of the variable
+            const GLsizei bufSize = 256;
+            GLchar uniName[bufSize];
+
+            // Get the current uniform informations
+            glGetActiveUniform(programID, i, bufSize, &nameLength, &size, &type, uniName);
+
+            GLint location = glGetUniformLocation(programID, uniName);
+
+            if (location < 0)
+            {
+                Core::Debug::Log::error("Cannot find the uniform named: " + std::string(uniName) + " - Location not valid");
+                continue;
+            }
+
+            // Create a new uniform with the location and the type
+            // And add it to a map
+            uniforms[uniName] = { location, type };
+        }
+    }
+
+    void ShaderProgram::setUniform(const std::string& target, const void* value,
+                                   int count, bool transpose) const
+    {
+        // Get the iterator with the target
+        const auto& currentIt = uniforms.find(target);
+
+        // Check if this iterator is valid
+        if (currentIt == uniforms.end())
+        {
+            Core::Debug::Log::error("Cannot find the uniform named: " + target + " - There is no uniform named like that");
+            return;
+        }
+
+        const Uniform& uniform = currentIt->second;
+
+        // Check if the location is valid
+        if (uniform.location < 0)
+        {
+            Core::Debug::Log::error("Cannot find the uniform named: " + target + " - Location not valid");
+            return;
+        }
+
+        // Call the correct function in function of the uniform's type
+        #pragma region Uniform seter
+        switch (uniform.type)
+        {
+            case GL_INT:
+            case GL_BOOL:
+            case GL_SAMPLER_2D_ARB:
+                glUniform1iv(uniform.location, count, (GLint*)value);
+                break;
+
+            case GL_INT_VEC2:
+            case GL_BOOL_VEC2:
+                glUniform2iv(uniform.location, count, (GLint*)value);
+                break;
+
+            case GL_INT_VEC3:
+            case GL_BOOL_VEC3:
+                glUniform3iv(uniform.location, count, (GLint*)value);
+                break;
+
+            case GL_INT_VEC4:
+            case GL_BOOL_VEC4:
+                glUniform4iv(uniform.location, count, (GLint*)value);
+                break;
+
+            case GL_FLOAT:
+                glUniform1fv(uniform.location, count, (GLfloat*)value);
+                break;
+
+            case GL_FLOAT_VEC2:
+                glUniform2fv(uniform.location, count, (GLfloat*)value);
+                break;
+
+            case GL_FLOAT_VEC3:
+                glUniform3fv(uniform.location, count, (GLfloat*)value);
+                break;
+
+            case GL_FLOAT_VEC4:
+                glUniform4fv(uniform.location, count, (GLfloat*)value);
+                break;
+
+            case GL_FLOAT_MAT2:
+                glUniformMatrix2fv(uniform.location, count, transpose, (GLfloat*)value);
+                break;
+
+            case GL_FLOAT_MAT3:
+                glUniformMatrix3fv(uniform.location, count, transpose, (GLfloat*)value);
+                break;
+
+            case GL_FLOAT_MAT4:
+                glUniformMatrix4fv(uniform.location, count, transpose, (GLfloat*)value);
+                break;
+
+            default:
+                // If the type is not supported, log this message
+                Core::Debug::Log::error("Type not supported");
+                break;
+        }
+        #pragma endregion
+    }
 }

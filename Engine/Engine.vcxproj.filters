@@ -40,6 +40,30 @@
     <Filter Include="Fichiers sources\Utils">
       <UniqueIdentifier>{3f64a28b-ee77-4b89-8972-4dca80460d5a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine">
+      <UniqueIdentifier>{b260d1d9-4235-4f95-aa3c-bac3c2fc2eac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine">
+      <UniqueIdentifier>{e03ed8e4-0b2f-461c-81ce-6717c207681d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\Physics">
+      <UniqueIdentifier>{b239ab45-44f9-4480-aba5-8ebfd0606ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\Physics">
+      <UniqueIdentifier>{1fd4e3f9-dd20-41a5-a9e8-a36aa0102e88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\Render">
+      <UniqueIdentifier>{b3322f59-d3ae-46d3-b7d4-f637955fc1aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\Render">
+      <UniqueIdentifier>{c8b3f9c5-d759-4dd6-8f6e-d909fbfd1555}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Engine\Render\LowRenderer">
+      <UniqueIdentifier>{f9886134-10d1-460f-8678-4315b04edf5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Engine\Render\LowRenderer">
+      <UniqueIdentifier>{1abba2a0-9545-4e39-981b-209b6f3a037f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -81,6 +105,42 @@
     <ClCompile Include="src\Utils\utils.cpp">
       <Filter>Fichiers sources\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="src\Engine\engine_master.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Render\render_manager.cpp">
+      <Filter>Fichiers sources\Engine\Render</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Physics\physic_manager.cpp">
+      <Filter>Fichiers sources\Engine\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Core\time.cpp">
+      <Filter>Fichiers sources\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Render\sprite_renderer.cpp">
+      <Filter>Fichiers sources\Engine\Render\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\object.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\game_object.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\component.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Render\renderer.cpp">
+      <Filter>Fichiers sources\Engine\Render\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\Render\model_renderer.cpp">
+      <Filter>Fichiers sources\Engine\Render\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Engine\graph.cpp">
+      <Filter>Fichiers sources\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\scene.cpp">
+      <Filter>Fichiers sources\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header\stb_image.h">
@@ -103,6 +163,42 @@
     </ClInclude>
     <ClInclude Include="include\Utils\utils.hpp">
       <Filter>Fichiers d%27en-tête\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\engine_master.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\Physics\physic_manager.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\Render\render_manager.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\Render</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Core\time.hpp">
+      <Filter>Fichiers d%27en-tête\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\object.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\game_object.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\component.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\renderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\Render\LowRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\model_renderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\Render\LowRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\sprite_renderer.hpp">
+      <Filter>Fichiers d%27en-tête\Engine\Render\LowRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Engine\graph.hpp">
+      <Filter>Fichiers d%27en-tête\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Resources\scene.hpp">
+      <Filter>Fichiers d%27en-tête\Resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

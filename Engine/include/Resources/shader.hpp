@@ -1,7 +1,7 @@
 #pragma once
 
-#include <iostream>
 #include <glad/glad.h>
+#include <unordered_map>
 
 namespace Resources
 {
@@ -28,6 +28,10 @@ namespace Resources
 		GLint programID = GL_INVALID_VALUE;
 
 		std::unordered_map<std::string, Uniform> uniforms;
+
+		void loadLocations();
+
+		void setUniform(const std::string& target, const void* value, int count = 1, bool transpose = false) const;
 
 	public:
 		ShaderProgram(const std::string& programName, const std::string& vertPath, const std::string& fragPath);

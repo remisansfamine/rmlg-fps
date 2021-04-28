@@ -9,7 +9,7 @@ namespace Core
 	{
 		Log::~Log()
 		{
-			Log::logInfo("Destroying the Logs Manager");
+			Log::info("Destroying the Logs Manager");
 
 			Log::saveToFile();
 		}
@@ -51,12 +51,12 @@ namespace Core
 
 		Assertion::Assertion()
 		{
-			Log::logInfo("Creating the Assertions Manager");
+			Log::info("Creating the Assertions Manager");
 		}
 
 		Assertion::~Assertion()
 		{
-			Log::logInfo("Destroying the Assertions Manager");
+			Log::info("Destroying the Assertions Manager");
 		}
 
 		void Assertion::out(const std::exception& assertion)

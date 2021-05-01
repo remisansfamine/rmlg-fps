@@ -155,7 +155,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C:\Users\remig\Desktop\Nouveau dossier\src\Engine\Render\camera.cpp" />
     <ClCompile Include="src\Core\application.cpp" />
     <ClCompile Include="src\Core\color.cpp" />
     <ClCompile Include="src\Core\debug.cpp" />
@@ -171,6 +170,7 @@
     <ClCompile Include="src\Engine\object.cpp" />
     <ClCompile Include="src\Engine\Physics\physic_manager.cpp" />
     <ClCompile Include="src\Engine\Physics\transform.cpp" />
+    <ClCompile Include="src\Engine\Render\camera.cpp" />
     <ClCompile Include="src\Engine\Render\light.cpp" />
     <ClCompile Include="src\Engine\Render\model.cpp" />
     <ClCompile Include="src\Engine\Render\model_renderer.cpp" />
@@ -214,6 +214,7 @@
     <ClInclude Include="include\Engine\Physics\physic_manager.hpp" />
     <ClInclude Include="include\Engine\Physics\transform.hpp" />
     <ClInclude Include="include\Engine\renderer.hpp" />
+    <ClInclude Include="include\Engine\Render\camera.hpp" />
     <ClInclude Include="include\Engine\Render\light.hpp" />
     <ClInclude Include="include\Engine\Render\model.hpp" />
     <ClInclude Include="include\Engine\Render\render_manager.hpp" />
@@ -230,8 +231,10 @@
     <ClInclude Include="include\Utils\utils.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="resources\shader\advancedLighting.frag" />
-    <None Include="resources\shader\advancedLighting.vert" />
+    <None Include="resources\shaders\advancedLighting.frag" />
+    <None Include="resources\shaders\advancedLighting.vert" />
+    <None Include="resources\shaders\testShader.frag" />
+    <None Include="resources\shaders\testShader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

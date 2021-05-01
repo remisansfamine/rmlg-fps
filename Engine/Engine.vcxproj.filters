@@ -180,13 +180,7 @@
     <ClCompile Include="src\Core\application.cpp">
       <Filter>Fichiers sources\Core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Resources\material.cpp">
-      <Filter>Fichiers sources\Resources</Filter>
-    </ClCompile>
     <ClCompile Include="src\Resources\mesh.cpp">
-      <Filter>Fichiers sources\Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Resources\texture.cpp">
       <Filter>Fichiers sources\Resources</Filter>
     </ClCompile>
     <ClCompile Include="src\Resources\resource.cpp">
@@ -197,6 +191,15 @@
     </ClCompile>
     <ClCompile Include="src\Engine\Render\model.cpp">
       <Filter>Fichiers sources\Engine\Render\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\remig\Desktop\Nouveau dossier\src\Engine\Render\camera.cpp">
+      <Filter>Fichiers sources\Engine\Render\LowRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\material.cpp">
+      <Filter>Fichiers sources\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Resources\texture.cpp">
+      <Filter>Fichiers sources\Resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

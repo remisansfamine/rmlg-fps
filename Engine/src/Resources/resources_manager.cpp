@@ -36,7 +36,7 @@ namespace Resources
 
 		Core::Debug::Log::info("Resources Manager initialized");
 
-		loadShaderProgram("advancedLighting", "resources/shader/advancedLighting.vert", "resources/shader/advancedLighting.frag");
+		loadShaderProgram("advancedLighting", "resources/shaders/advancedLighting.vert", "resources/shaders/advancedLighting.frag");
 	}
 
 	std::shared_ptr<Scene> ResourcesManager::loadScene(const std::string& scenePath)

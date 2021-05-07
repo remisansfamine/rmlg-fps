@@ -1,0 +1,10 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+# [Sprint00] 05-02-2021
+[+] Improving the Resources Manager
+[+] Improving the Application
+[+] Improving the Transform system
+[+] Adding Render Manager
+[+] Adding components system
+[+] Adding Inputs Manager

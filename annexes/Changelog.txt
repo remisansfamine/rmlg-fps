@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+# [Sprint02] 05-12-2021
+[+] Adding UI System (Buttons)
+[+] Adding Scene parsing (Save/Load)
+[+] Adding the camera movements
+[+] Adding and fully supporting the Sprite Renderer components
+[+] Fixing bugs with the Rigidbodies
+[+] Adding support to mouse inputs
+
 # [Sprint01] 05-07-2021
 [+] Adding the Physics Manager
 [+] Adding the Rigidbody components
